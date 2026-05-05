@@ -17,6 +17,9 @@ jobs:
     name: Lint (optional)
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: user-management
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +28,7 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
+          cache-dependency-path: user-management/package-lock.json
 
       - name: Install Node dependencies
         run: npm ci
@@ -42,6 +46,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     needs: lint
+    defaults:
+      run:
+        working-directory: user-management
     strategy:
       fail-fast: false
       matrix:
@@ -62,12 +69,13 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
+          cache-dependency-path: user-management/package-lock.json
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('user-management/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
@@ -99,6 +107,9 @@ jobs:
     timeout-minutes: 60
     needs: test
     if: github.event_name == 'pull_request' || github.event_name == 'schedule'
+    defaults:
+      run:
+        working-directory: user-management
 
     steps:
       - uses: actions/checkout@v4
@@ -115,12 +126,13 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
+          cache-dependency-path: user-management/package-lock.json
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('user-management/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 

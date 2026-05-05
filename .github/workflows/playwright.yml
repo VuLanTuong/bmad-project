@@ -8,6 +8,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: user-management
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-java@v4
@@ -18,6 +21,8 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        cache: npm
+        cache-dependency-path: user-management/package-lock.json
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers

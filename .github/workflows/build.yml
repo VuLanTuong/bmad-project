@@ -10,14 +10,17 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: user-management
 
     permissions:
       contents: write
@@ -41,7 +44,7 @@ jobs:
 
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: ./mvnw -B package
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
