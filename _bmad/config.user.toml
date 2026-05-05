@@ -10,8 +10,5 @@
 # ─────────────────────────────────────────────────────────────────
 
 [core]
-user_name = "Tuong"
+user_name = "Tuongvl"
 communication_language = "English"
-
-[modules.bmm]
-user_skill_level = "intermediate"
