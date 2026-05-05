@@ -1,0 +1,28 @@
+{
+  "name": "user-management",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">\r     <a href=\"https://www.codefactor.io/repository/github/bajahaw/user-management\"><img src=\"https://www.codefactor.io/repository/github/bajahaw/user-management/badge\" alt=\"CodeFactor\" /></a>\r     <img src=\"https://img.shields.io/badge/open%20source-yes-yellow\" alt=\"opensource\">\r     <img src=\"https://img.shields.io/badge/maintained-yes-green\" alt=\"maintained\">\r     <a href=\"https://hits.seeyoufarm.com\"><img src=\"https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FBajahaw%2Fuser-management&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false\" alt=\"hits\"/></a>\r </div>",
+  "main": "index.js",
+  "scripts": {
+    "java21:activate": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\use-portable-java21.ps1",
+    "app:run:java21": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\run-springboot-portable-java21.ps1",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bajahaw/user-management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bajahaw/user-management/issues"
+  },
+  "homepage": "https://github.com/Bajahaw/user-management#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0"
+  }
+}
