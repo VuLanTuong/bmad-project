@@ -13,6 +13,12 @@ type AppFixtures = {
   pageAsAdmin: void;
   /** Logs in as seeded regular user (bob@mail.co). */
   pageAsUser: void;
+  /** TODO: seed users/roles for security scenarios. */
+  seedUsersAndRoles: () => Promise<void>;
+  /** TODO: centralized session management helper for revocation tests. */
+  sessionControl: {
+    invalidateCurrentSession: () => Promise<void>;
+  };
 };
 
 export const test = base.extend<AppFixtures>({
@@ -46,6 +52,21 @@ export const test = base.extend<AppFixtures>({
     await homePage.expectLoaded();
     await expect(page.locator('#email')).toContainText('bob@mail.co');
     await use();
+  },
+
+  seedUsersAndRoles: async ({}, use) => {
+    const seed = async () => {
+      // TODO: Implement API seeding for admin/user role combinations.
+    };
+    await use(seed);
+  },
+
+  sessionControl: async ({}, use) => {
+    await use({
+      invalidateCurrentSession: async () => {
+        // TODO: Implement server-side session/token invalidation helper.
+      },
+    });
   },
 });
 

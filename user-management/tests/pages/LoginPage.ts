@@ -34,4 +34,13 @@ export class LoginPage {
     await expect(this.stateBanner).toBeVisible();
     await expect(this.stateBanner).not.toHaveCSS('visibility', 'hidden');
   }
+
+  async logoutViaUi() {
+    // TODO: Implement logout entrypoint from pages where logout button exists.
+  }
+
+  async expectAtLoginScreen() {
+    await expect(this.page).toHaveURL(/\/login$/);
+    await expect(this.form).toBeVisible();
+  }
 }

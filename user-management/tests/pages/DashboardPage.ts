@@ -82,4 +82,14 @@ export class DashboardPage {
     await row.locator('.d-flex.align-items-center').click();
     await expect(this.userDataModal).toBeVisible();
   }
+
+  async expectAdminOnlyControlsHidden() {
+    // TODO: Expand to include all privileged controls in final implementation.
+    await expect(this.makeAdminButton).toBeHidden();
+  }
+
+  async attemptAdminActionAndCaptureStatus() {
+    // TODO: Convert to request interception + status capture.
+    return { status: 0 };
+  }
 }

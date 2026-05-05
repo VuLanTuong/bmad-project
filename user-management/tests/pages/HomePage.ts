@@ -30,6 +30,16 @@ export class HomePage {
     await expect(this.page.locator('#userList')).toBeVisible();
   }
 
+  async gotoDashboardRouteDirect() {
+    // TODO: Use this for deep-link authorization checks.
+    await this.page.goto('/dashboard');
+  }
+
+  async expectUnauthorizedRedirect() {
+    // TODO: Tighten this assertion to match final redirect policy.
+    await expect(this.page).toHaveURL(/\/(login|403)$/);
+  }
+
   async logout() {
     await this.logoutButton.click();
   }
