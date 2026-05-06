@@ -42,6 +42,9 @@ jobs:
           distribution: 'liberica'
           cache: maven
 
+      - name: Ensure Maven wrapper is executable
+        run: chmod +x ./mvnw
+
 
       - name: Build with Maven
         run: ./mvnw -B package
