@@ -46,10 +46,11 @@ jobs:
         run: chmod +x ./mvnw
 
 
+      # Do not set JWT_SECRET here unless the repository secret is defined. An unset
+      # secret expands to an empty string and overrides jwt.secret from application.properties,
+      # which causes JJWT WeakKeyException during tests.
       - name: Build with Maven
         run: ./mvnw -B package
-        env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph
