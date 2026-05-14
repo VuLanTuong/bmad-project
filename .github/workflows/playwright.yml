@@ -12,15 +12,15 @@ jobs:
       run:
         working-directory: user-management
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-java@v4
+    - uses: actions/checkout@v6
+    - uses: actions/setup-java@v5
       with:
         distribution: temurin
         java-version: '21'
         cache: maven
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v5
       with:
-        node-version: lts/*
+        node-version: '22'
         cache: npm
         cache-dependency-path: user-management/package-lock.json
     - name: Install dependencies
@@ -31,7 +31,7 @@ jobs:
       run: chmod +x ./mvnw
     - name: Run Playwright tests
       run: npx playwright test
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}
       with:
         name: playwright-report

@@ -14,6 +14,11 @@ import { defineConfig, devices } from '@playwright/test';
  */
 const noWebServer = !!process.env.PLAYWRIGHT_NO_WEB_SERVER;
 
+/** Timestamped HTML report folder under playwright-report/. */
+const playwrightReportTimestamp =
+  process.env.PLAYWRIGHT_REPORT_TIMESTAMP ??
+  new Date().toISOString().replace(/[:.]/g, '-');
+
 export default defineConfig({
   testDir: './tests',
   /* Shared in-memory DB: keep one worker unless tests use fully isolated data. */
@@ -24,8 +29,6 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: process.env.BASE_URL ?? 'http://localhost:8080',
@@ -70,6 +73,21 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
+  ],
+  reporter: [
+    [
+      'html',
+      {
+        title: 'User Management E2E',
+        outputFolder: `playwright-report/${playwrightReportTimestamp}`,
+        open: process.env.CI ? 'never' : 'on-failure',
+        noCopyPrompt: false,
+        noSnippets: false,
+        doNotInlineAssets: false, // CSP-friendly separate JS/CSS files
+      },
+    ],
+    ['list'],
+    ['json', { outputFile: `playwright-report/${playwrightReportTimestamp}/report.json` }],
   ],
 
   /* Requires JDK 21 (matches pom.xml). Reuse existing server when developing locally. */

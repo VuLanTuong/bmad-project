@@ -21,10 +21,10 @@ jobs:
       run:
         working-directory: user-management
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "npm"
@@ -55,24 +55,24 @@ jobs:
         shard: [1, 2, 3, 4]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "npm"
           cache-dependency-path: user-management/package-lock.json
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('user-management/package-lock.json') }}
@@ -96,7 +96,7 @@ jobs:
 
       - name: Upload shard artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-results-${{ matrix.shard }}
           path: |
@@ -115,24 +115,24 @@ jobs:
         working-directory: user-management
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "npm"
           cache-dependency-path: user-management/package-lock.json
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('user-management/package-lock.json') }}
@@ -159,7 +159,7 @@ jobs:
 
       - name: Upload burn-in artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: burn-in-failures
           path: |
@@ -174,7 +174,7 @@ jobs:
     if: always()
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
 
